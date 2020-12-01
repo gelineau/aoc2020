@@ -22,9 +22,7 @@ def find_three_numbers(input: Set[int], sum: int) -> Iterator[
     for value1 in input.copy():
         input.remove(value1)
         results = find_two_numbers(input, sum - value1)
-        for value2 in results:
-            yield value2, sum - value1 - value2, value1,
-
+        yield from ((value1, value2, sum - value1 - value2) for value2 in results)
 
 results = find_three_numbers(input, 2020)
 print(list(a * b * c for (a, b, c) in results))
