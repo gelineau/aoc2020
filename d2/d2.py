@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Iterator, Callable
+from typing import Iterator, Callable, List
 
 filename = "puzzle.txt"
 from parse import compile
@@ -27,19 +27,25 @@ def is_valid_p1(result: PasswordData) -> bool:
     char_number = result.password.count(result.char)
     return result.min_char_number <= char_number <= result.max_char_number
 
-def xor(a: bool, b:bool)->bool:
+
+def xor(a: bool, b: bool) -> bool:
     return a + b == 1
 
+
 def is_valid_p2(result: PasswordData) -> bool:
-    first_position_matches = result.password[result.min_char_number - 1] == result.char
-    second_position_matches = result.password[result.max_char_number - 1] == result.char
+    first_position_matches = result.password[
+                                 result.min_char_number - 1] == result.char
+    second_position_matches = result.password[
+                                  result.max_char_number - 1] == result.char
     return xor(first_position_matches, second_position_matches)
 
 
-def valid_result_number(input: Iterator[PasswordData], validation_function: Callable[[PasswordData], bool]) -> int:
+def valid_result_number(input: List[PasswordData],
+                        validation_function: Callable[
+                            [PasswordData], bool]) -> int:
     return len([1 for result in input if validation_function(result)])
 
 
-input = read_input(filename)
+input = list(read_input(filename))
 for validation_function in (is_valid_p1, is_valid_p2):
     print(valid_result_number(input, validation_function))
