@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Iterator, Callable, List
 
+from more_itertools import ilen
+
 filename = "puzzle.txt"
 from parse import compile
 
@@ -43,7 +45,7 @@ def is_valid_p2(result: PasswordData) -> bool:
 def valid_result_number(input: List[PasswordData],
                         validation_function: Callable[
                             [PasswordData], bool]) -> int:
-    return len([1 for result in input if validation_function(result)])
+    return ilen(result for result in input if validation_function(result))
 
 
 input = list(read_input(filename))
