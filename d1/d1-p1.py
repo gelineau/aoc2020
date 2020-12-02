@@ -1,6 +1,6 @@
 from typing import Set
 
-filename = "d1-p1.txt"
+filename = "d1/d1-p1.txt"
 
 def read_input()->Set[int]:
     with open(filename, "r", encoding="utf-8") as file:

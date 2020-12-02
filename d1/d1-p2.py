@@ -1,6 +1,6 @@
 from typing import Set, Iterator, Tuple
 
-filename = "d1-p1.txt"
+filename = "d1/d1-p1.txt"
 
 
 def read_input() -> Set[int]:
