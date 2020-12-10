@@ -18,11 +18,6 @@ input = list(read_input())
 for index, number in enumerate(input[25:], start=25):
     found = False
     window = set(input[index-25:index])
-    for candidate in window:
-        if candidate != number / 2 and (number - candidate) in window:
-            found = True
-            break
-    if found == False:
+    if all((number - candidate) not in window for candidate in window if candidate != number / 2):
         print(number, "is not a sum")
-        exit(0)
 
